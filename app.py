@@ -24,11 +24,16 @@ def predict():
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
+    
+    if prediction==[0]:
+        return render_template('index.html', prediction_text='The Predicted Value is {}'.format(prediction),pred= 'Banknote is real.')
+    else:
+        return render_template('index.html', prediction_text='The Predicted Value is {}'.format(prediction),pred='Banknote is fake.')
 
 
 
-    return render_template('index.html', prediction_text='Note is $ {}'.format(prediction))
 
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
